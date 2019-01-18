@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jide
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: jide-api
+  namespace: jide
+  labels:
+    app: jide
+spec:
+  ports:
+    - port: 3000
+  selector:
+    app: jide
+  type: LoadBalancer # Required by docker-for-mac kubernetes to expose locally
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jide-api
+  namespace: jide
+  labels:
+    app: jide
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: jide
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: jide
+    spec:
+      containers:
+        - name: jide
+          image: cflynnus/jide
+          ports:
+            - containerPort: 3000
