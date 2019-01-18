@@ -15,7 +15,7 @@ I recommend installing docker-for-mac and enabling kubernetes.
 
 To edit the service's code and see changes applied to containers in the
 development environment we use `ksync`. Install from
-![https://github.com/vapor-ware/ksync](https://github.com/vapor-ware/ksync)
+[https://github.com/vapor-ware/ksync](https://github.com/vapor-ware/ksync)
 
 ```bash
 git clone git@github.com:cflynn07/jide.git && cd ./jide
