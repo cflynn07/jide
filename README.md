@@ -46,7 +46,16 @@ jide-api-5c775d88dd-h6858   1/1       Running   0          2m
 jide-api-5c775d88dd-swxjx   1/1       Running   0          2m
 ```
 
-The application should be accessible in your browser at `http://localhost:3000`
+The application should be accessible in your browser at `http://localhost:3000`  
+
+To edit the frontend or the API code and see the changes reflected in your
+development environment, set up ksync.
+
+```bash
+$ ksync init
+$ ksync watch & # Runs in background
+$ ksync create -n jide --selector=app=jide $(pwd) /go/src/app # Now everytime a file is changed in your workdir ksync will replace the pods
+```
 
 Tests
 -----

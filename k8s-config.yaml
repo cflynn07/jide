@@ -42,6 +42,10 @@ spec:
     spec:
       containers:
         - name: jide
-          image: cflynnus/jide
+          image: cflynnus/jide:latest
+          imagePullPolicy: Always
+          env:
+            - name: ENVIRONMENT
+              value: development
           ports:
             - containerPort: 3000
