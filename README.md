@@ -57,5 +57,19 @@ $ ksync watch & # Runs in background
 $ ksync create -n jide --selector=app=jide $(pwd) /go/src/app # Now everytime a file is changed in your workdir ksync will replace the pods
 ```
 
+#### Teardown
+To shut down the development environment delete the kubernetes namespace
+```bash
+$ kubectl delete namespace jide
+```
+
+Verify cleanup is in progress by checking that the pods are terminating
+```bash
+-> % kubectl -n jide get pods
+NAME                        READY     STATUS        RESTARTS   AGE
+jide-api-7db54796fc-f56v7   1/1       Terminating   0          13m
+jide-api-7db54796fc-l2slt   1/1       Terminating   0          13m
+```
+
 Tests
 -----
