@@ -42,7 +42,7 @@ spec:
     spec:
       containers:
         - name: jide
-          image: cflynnus/jide:latest
+          image: docker.io/cflynnus/jide
           imagePullPolicy: Always
           env:
             - name: ENVIRONMENT
