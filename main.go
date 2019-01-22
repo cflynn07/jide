@@ -1,21 +1,27 @@
 package main
 
 import (
-	"fmt"
+	"github.com/julienschmidt/httprouter"
+	"html/template"
 	"log"
 	"net/http"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "hello 2")
+func handler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	log.Println("func handler")
+	t, err := template.ParseFiles("templates/index.html")
+	if err != nil { // if there is an error
+		log.Print("template parsing error: ", err) // log it
+	}
+	err = t.Execute(w, nil)
 }
 
 func main() {
-	fs := http.FileServer(http.Dir("frontend/dist"))
-	http.Handle("/", fs)
+	router := httprouter.New()
 
-	http.HandleFunc("/test", handler)
+	router.GET("/", handler)
+	router.ServeFiles("/static/*filepath", http.Dir("frontend/dist/"))
 
-	log.Println("Listening...")
-	http.ListenAndServe(":3000", nil)
+	log.Println("Listening 3...")
+	http.ListenAndServe(":3000", router)
 }
