@@ -22,6 +22,6 @@ func main() {
 	router.GET("/", handler)
 	router.ServeFiles("/static/*filepath", http.Dir("frontend/dist/"))
 
-	log.Println("Listening 3...")
+	log.Println("Listening 13...")
 	http.ListenAndServe(":3000", router)
 }

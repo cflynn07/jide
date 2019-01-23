@@ -8,15 +8,15 @@ metadata:
 apiVersion: v1
 kind: Service
 metadata:
-  name: jide-api
+  name: jide-app
   namespace: jide
   labels:
-    app: jide
+    app: jide-app
 spec:
   ports:
     - port: 3000
   selector:
-    app: jide
+    app: jide-app
   type: LoadBalancer # Required by docker-for-mac kubernetes to expose locally
 
 ---
@@ -24,28 +24,22 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jide-api
+  name: jide-app
   namespace: jide
   labels:
-    app: jide
+    app: jide-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: jide
-  strategy:
-    type: Recreate
+      app: jide-app
   template:
     metadata:
       labels:
-        app: jide
+        app: jide-app
     spec:
       containers:
         - name: jide
-          image: docker.io/cflynnus/jide
-          imagePullPolicy: Always
-          env:
-            - name: ENVIRONMENT
-              value: development
+          image: cflynnus/jide
           ports:
             - containerPort: 3000

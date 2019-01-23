@@ -1,9 +1,9 @@
-apiVersion: skaffold/v1beta2
+apiVersion: skaffold/v1beta3
 kind: Config
 build:
   artifacts:
-  - image: docker.io/cflynnus/jide
+  - image: cflynnus/jide
 deploy:
   kubectl:
     manifests:
-    - k8s-config.yaml
+    - kubernetes/deployment.yaml
